@@ -4,7 +4,7 @@ using MTD_Lab2;
 namespace UnitTests
 {
     [TestClass]
-    public class UnitTest1
+    public class CircularListTest
     {
         [TestMethod]
         public void TestMethod1()
