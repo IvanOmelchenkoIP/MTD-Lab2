@@ -16,7 +16,7 @@ The program is an implementation of a Linked List that works with the values of 
 
 *Adds an element to a Linked List by given index.* **If incorrect index is given, generates an exception.**
 
-    char delete(int index)
+    char Delete(int index)
 
 *Deletes an element from a Linked List by the index and returns its value.* **If incorrect index is given, generates an exception.**
 
@@ -63,6 +63,14 @@ Gradebook number = 0418.
 Final task: implement Singly Linked Circular List
 
 ## Test Running
+
+To run the unit test use the following command:
+
+    dotnet test yourPathToUnitTestProject
+
+For example:
+
+    dotnet test UnitTests\UnitTests.csproj
 
 ## Failed CI Commit
 
