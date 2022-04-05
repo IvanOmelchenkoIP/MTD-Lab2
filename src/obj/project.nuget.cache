@@ -1,10 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "qhmTf1XwXLG2tjhiLYOJkVU3Wg2dtJNsXJYUSqcIvIV/g9X07v2EqLawxUaNUXvwex/RJLX6h4MfGQIjbpjvTw==",
+  "dgSpecHash": "/+6CzIOtP0nVZkkNLw3Xjn6VZ/KyPFJ0OfByjWrATJQCKRpctp7a+PZ91xtR2hXUHX4CjrS/hvP71g/+ZYGVyg==",
   "success": true,
-  "projectFilePath": "D:\\GitHub\\MTD\\MTD-Lab2\\src\\MTD-Lab2.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\1-ПК\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.22\\microsoft.netcore.app.host.win-x64.3.1.22.nupkg.sha512"
-  ],
+  "projectFilePath": "D:\\GitHub\\MTD-Lab2\\src\\MTD-Lab2.csproj",
+  "expectedPackageFiles": [],
   "logs": []
 }

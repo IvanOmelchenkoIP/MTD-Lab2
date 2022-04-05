@@ -17,7 +17,7 @@ namespace MTD_Lab2
 
         public int Length() 
         {
-            return 0;
+            return length;
         }
 
         public void Append(char element)
