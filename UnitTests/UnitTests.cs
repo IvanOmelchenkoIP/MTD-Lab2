@@ -7,8 +7,16 @@ namespace UnitTests
     public class CircularListTest
     {
         [TestMethod]
-        public void TestMethod1()
+        public void Length_AppendSingle()
         {
+            int expected = 1;
+
+            CircularList list = new CircularList();
+            list.Append('a');
+
+            int length = list.Length();
+
+            Assert.AreEqual(expected, length);
         }
     }
 }
