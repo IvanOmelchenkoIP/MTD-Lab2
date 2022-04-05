@@ -1,5 +1,7 @@
 # Methodologies and Technologies of Program Development - Laboratory work 2
 
+Status: [![Build and Test](https://github.com/IvanOmelchenkoIP/MTD-Lab2/actions/workflows/tests.yml/badge.svg)](https://github.com/IvanOmelchenkoIP/MTD-Lab2/actions/workflows/tests.yml)
+
 ## General Description
 
 The program is an implementation of a Linked List that works with the values of type **char** with the following methods:
