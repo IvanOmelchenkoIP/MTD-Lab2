@@ -123,7 +123,20 @@ namespace MTD_Lab2
 
         public int FindFirst(char element)
         {
-            return -1;
+            int index = -1;
+            int counter = 0;
+            CharNode current = head;
+            while (current.next != head)
+            {
+                if (current.value == element)
+                {
+                    index = counter;
+                    break;
+                }
+                current = current.next;
+                counter++;
+            }
+            return index;
         }
 
         public int FindLast(char element)
