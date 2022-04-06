@@ -17,4 +17,5 @@ jobs:
         with:
           dotnet-version: ${{ matrix.dotnet-version }}
       - name: Test with CLI
+        working-directory: ./UnitTests 
         run: dotnet test
