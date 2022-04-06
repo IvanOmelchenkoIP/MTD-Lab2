@@ -141,7 +141,17 @@ namespace MTD_Lab2
 
         public int FindLast(char element)
         {
-            return -1;
+            int index = -1;
+            int counter = 0;
+            CharNode current = head;
+            while (current.next != head)
+            {
+                if (current.value == element) index = counter;
+
+                current = current.next;
+                counter++;
+            }
+            return index;
         }
 
         public void Clear()
