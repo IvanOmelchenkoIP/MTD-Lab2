@@ -33,7 +33,7 @@ namespace MTD_Lab2
             }
 
             CharNode current = head;
-            while(true)
+            while (true)
             {
                 if (current.next == head)
                 {
@@ -52,7 +52,34 @@ namespace MTD_Lab2
 
         public void Insert(char element, int index)
         { 
+            if (index > length || index < 0) throw new Exception("ERROR! Requesting to insert element by incorrect index!");
 
+            if (index == length) 
+            {
+                Append(element);
+                return;
+            }
+
+            int counter = 0;
+            CharNode current = head;
+            while (true)
+            {
+                if (counter == index) 
+                {
+                    CharNode next = current.next;
+
+                    CharNode inserted = new CharNode();
+                    inserted.value = element;
+                    inserted.next = next;
+
+                    current.next = inserted;
+
+                    length++;
+                    return;
+                }
+                current = current.next;
+                counter++;
+            }
         }
 
         public char Delete(int index)
@@ -67,6 +94,9 @@ namespace MTD_Lab2
 
         public char Get(int index)
         {
+            if (head == null) throw new Exception("ERROR! The Linked List is empty!");
+            if (index >= length || index < 0) throw new Exception("ERROR! Element by incorrect index is requested!");
+
             int counter = 0;
             CharNode current = head;
             while (true)
