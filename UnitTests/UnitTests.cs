@@ -113,5 +113,74 @@ namespace UnitTests
 
             Assert.AreEqual(expected, length);
         }
+
+        [TestMethod]
+        public void Length_InsertSingle()
+        {
+            int expected = 1;
+
+            CircularList list = new CircularList();
+            list.Insert('a', 0);
+
+            int length = list.Length();
+
+            Assert.AreEqual(expected, length);
+        }
+
+        [TestMethod]
+        public void Length_InsertMultiple()
+        {
+            int expected = 7;
+
+            CircularList list = new CircularList();
+            list.Insert('a', 0);
+            list.Insert('b', 0);
+            list.Insert('c', 2);
+            list.Insert('d', 3);
+            list.Insert('e', 3);
+            list.Insert('f', 4);
+            list.Insert('g', 5);
+
+            int length = list.Length();
+
+            Assert.AreEqual(expected, length);
+        }
+
+        [TestMethod]
+        public void Length_InsertSingleAppendSingle()
+        {
+            int expected = 2;
+
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Insert('b', 0);
+
+            int length = list.Length();
+
+            Assert.AreEqual(expected, length);
+        }
+
+        [TestMethod]
+        public void Length_InsertMultipleAppendMultiple()
+        {
+            int expected = 11;
+
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('b');
+            list.Append('c');
+            list.Append('d');
+            list.Insert('e', 0);
+            list.Insert('f', 0);
+            list.Insert('g', 3);
+            list.Insert('h', 3);
+            list.Insert('i', 4);
+            list.Insert('j', 2);
+            list.Insert('k', 10);
+
+            int length = list.Length();
+
+            Assert.AreEqual(expected, length);
+        }
     }
 }
