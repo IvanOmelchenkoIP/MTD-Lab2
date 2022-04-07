@@ -143,7 +143,17 @@ namespace MTD_Lab2
 
         public CircularList Clone()
         {
-            return null;
+            if (head == null) return new CircularList();
+
+            CircularList cloned = new CircularList();
+            CharNode current = head;
+            while (true) 
+            {
+                cloned.Append(current.value);
+
+                if (current.next == head) return cloned;
+                current = current.next;
+            }
         }
 
         public void Reverse()
@@ -192,7 +202,38 @@ namespace MTD_Lab2
 
         public void Extend(CircularList list)
         {
+            if (list.Length() == 0) return;
 
+            CircularList extender = list.Clone();
+            length += extender.Length();
+
+            if (head == null)
+            {
+                head = extender.head;
+                return;
+            }
+
+            CharNode current = head;
+            while (true)
+            {
+                if (current.next == head)
+                {
+                    current.next = extender.head;
+                    break;
+                }
+                current = current.next;
+            }
+
+            CharNode extCurrent = extender.head;
+            while(true)
+            {
+                if (extCurrent.next == extender.head) 
+                {
+                    extCurrent.next = head;
+                    break;
+                }
+                extCurrent = extCurrent.next;
+            }
         }
     }
 }
