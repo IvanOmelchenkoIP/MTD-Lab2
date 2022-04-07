@@ -119,7 +119,48 @@ namespace MTD_Lab2
 
         public void DeleteAll(char element)
         {
+            if (head == null) return;
 
+            CharNode current = head;
+            CharNode previous = null;
+            CharNode next = current.next;
+            while (true)
+            {
+                if (current.value == element)
+                {
+                    if (current == head)
+                    {
+                        if (current.next == head)
+                        {
+                            head = null;
+                            return;
+                        }
+                        else
+                        {
+                            CharNode tmp = head;
+                            while (true)
+                            {
+                                if (tmp.next == head)
+                                {
+                                    tmp.next = next;
+                                    break;
+                                }
+                                tmp = tmp.next;
+                            }
+                            head = next;
+                        }
+                        length--;
+                    }
+                    else
+                    {
+                        previous.next = next;
+                    }
+                }
+                if (current.next == head) return;
+                previous = current;
+                current = current.next;
+                next = current.next;
+            }
         }
 
         public char Get(int index)
@@ -158,7 +199,33 @@ namespace MTD_Lab2
 
         public void Reverse()
         {
+            if (head == null) return;
 
+            CircularList reversed = new CircularList();
+            CharNode current;
+            CharNode next;
+            while (true)
+            {
+                current = head;
+                next = current.next;
+                while (true)
+                {
+                    if (next.next == head)
+                    {
+                        if (current.next == head)
+                        {
+                            reversed.Append(current.value);
+                            head = reversed.head;
+                            return;
+                        }
+                        reversed.Append(next.value);
+                        current.next = head;
+                        break;
+                    }
+                    current = current.next;
+                    next = current.next;
+                }
+            }
         }
 
         public int FindFirst(char element)
