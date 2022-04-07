@@ -84,7 +84,37 @@ namespace MTD_Lab2
 
         public char Delete(int index)
         {
-            return '0';
+            if (head == null) throw new Exception("ERROR! Can`t delete any element of an empty Linked List!");
+            if (index >= length || index < 0) throw new Exception("ERROR! Requested to delete an element by incorrect index!");
+
+            if (head.next == head)
+            {
+                char value = head.value;
+                head = null;
+
+                length = 0;
+                return value;
+            }
+
+            int counter = 0;
+            CharNode current = head;
+            CharNode deleted = current.next;
+            while (true)
+            {
+                if (counter == index - 1)
+                {
+                    CharNode next = deleted.next;
+
+                    char value = deleted.value;
+                    current.next = next;
+
+                    length--;
+                    return value;
+                }
+                current = current.next;
+                deleted = current.next;
+                counter++;
+            }
         }
 
         public void DeleteAll(char element)
@@ -156,7 +186,8 @@ namespace MTD_Lab2
 
         public void Clear()
         {
-
+            head = null;
+            length = 0;
         }
 
         public void Extend(CircularList list)
