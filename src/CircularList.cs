@@ -24,7 +24,7 @@ namespace MTD_Lab2
         {
             if (head == null)
             {
-                CharNode head = new CharNode();
+                head = new CharNode();
                 head.value = element;
                 head.next = head;
 
