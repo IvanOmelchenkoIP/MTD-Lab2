@@ -44,40 +44,39 @@ namespace MTD_Lab2
 
         public void Insert(char element, int index)
         { 
-            if (index > length || index < 0) throw new Exception("ERROR! Requesting to insert element by incorrect index!");
+            if (index > length || index < 0) throw new IndexOutOfRangeException("ERROR! Requested to insert element by incorrect index!");
 
             if (index == length)
             {
                 Append(element);
+                return;
+            }
+
+            CharNode current = head;
+            if (index == 0)
+            {
+                CharNode inserted = new CharNode();
+
+                inserted.value = element;
+                inserted.next = head;
+
+                while (current.next != head) current = current.next;
+                current.next = inserted;
+
+                head = inserted;
             }
             else
             {
-                CharNode current = head;
-                if (index == 0)
-                {
-                    CharNode inserted = new CharNode();
+                for (int counter = 0; counter < index - 1; counter++) current = current.next;
+                CharNode next = current.next;
 
-                    inserted.value = element;
-                    inserted.next = head;
+                CharNode inserted = new CharNode();
+                inserted.value = element;
+                inserted.next = next;
 
-                    while (current.next != head) current = current.next;
-                    current.next = inserted;
-
-                    head = inserted;
-                }
-                else
-                {
-                    for (int counter = 0; counter < index - 1; counter++) current = current.next;
-                    CharNode next = current.next;
-
-                    CharNode inserted = new CharNode();
-                    inserted.value = element;
-                    inserted.next = next;
-
-                    current.next = inserted;
-                }
-                length++;
+                current.next = inserted;
             }
+            length++;
         }
 
         public char Delete(int index)
@@ -163,8 +162,8 @@ namespace MTD_Lab2
 
         public char Get(int index)
         {
-            if (head == null) throw new Exception("ERROR! The Linked List is empty!");
-            if (index >= length || index < 0) throw new Exception("ERROR! Element by incorrect index is requested!");
+            if (head == null) throw new NullReferenceException("ERROR! Requested to get element in an empty Linked List!");
+            if (index >= length || index < 0) throw new IndexOutOfRangeException("ERROR! Requested to get an element by incorrect index!");
 
             CharNode current = head;
             for (int counter = 0; counter < index; counter++) current = current.next;

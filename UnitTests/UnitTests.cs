@@ -1,12 +1,12 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MTD_Lab2;
 using System;
+
 namespace UnitTests
 {
     [TestClass]
     public class CircularListTest
     {
-
         [TestMethod]
         public void Get_AppendSingle()
         {
@@ -69,6 +69,72 @@ namespace UnitTests
             char value = list.Get(4);
 
             Assert.AreEqual(expected, value);
+        }
+
+        [TestMethod]
+        public void GetFirst_EmptyFirst()
+        {
+            CircularList list = new CircularList();
+
+            Exception exception = Assert.ThrowsException<NullReferenceException>(() => list.Get(0));
+        }
+
+        [TestMethod]
+        public void GetNegative_EmptyList()
+        {
+            CircularList list = new CircularList();
+
+            Exception exception = Assert.ThrowsException<NullReferenceException>(() => list.Get(-1));
+        }
+
+        [TestMethod]
+        public void GetExtra_EmptyList()
+        {
+            CircularList list = new CircularList();
+
+            Exception exception = Assert.ThrowsException<NullReferenceException>(() => list.Get(3));
+        }
+
+        [TestMethod]
+        public void GetNegative_SingleElementList()
+        {
+            CircularList list = new CircularList();
+            list.Append('a');
+
+            Exception exception = Assert.ThrowsException<IndexOutOfRangeException>(() => list.Get(-1));
+        }
+
+        [TestMethod]
+        public void GetExtra_SingleElementList()
+        {
+            CircularList list = new CircularList();
+            list.Append('a');
+
+            Exception exception = Assert.ThrowsException<IndexOutOfRangeException>(() => list.Get(3));
+        }
+
+        [TestMethod]
+        public void GetNegative_MultipleElementLength()
+        {
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('b');
+            list.Append('c');
+            list.Append('d');
+
+            Exception exception = Assert.ThrowsException<IndexOutOfRangeException>(() => list.Get(-1));
+        }
+
+        [TestMethod]
+        public void GetExtra_MultipleElementLength()
+        {
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('b');
+            list.Append('c');
+            list.Append('d');
+
+            Exception exception = Assert.ThrowsException<IndexOutOfRangeException>(() => list.Get(4));
         }
 
         [TestMethod]
@@ -229,6 +295,62 @@ namespace UnitTests
         }
 
         [TestMethod]
+        public void InsertNegative_EmptyList()
+        {
+            CircularList list = new CircularList();
+
+            Exception exception = Assert.ThrowsException<IndexOutOfRangeException>(() => list.Insert('a', -1));
+        }
+
+        [TestMethod]
+        public void InsertExtra_EmptyList()
+        {
+            CircularList list = new CircularList();
+
+            Exception exception = Assert.ThrowsException<IndexOutOfRangeException>(() => list.Insert('a', 1));
+        }
+
+        [TestMethod]
+        public void InsertNegative_SingleElementList()
+        {
+            CircularList list = new CircularList();
+            list.Append('a');
+
+            Exception exception = Assert.ThrowsException<IndexOutOfRangeException>(() => list.Insert('a', -1));
+        }
+
+        [TestMethod]
+        public void InsertExtra_SingleElementList()
+        {
+            CircularList list = new CircularList();
+            list.Append('a');
+
+            Exception exception = Assert.ThrowsException<IndexOutOfRangeException>(() => list.Insert('a', 2));
+        }
+
+        [TestMethod]
+        public void InsertNegative_MultipleElementList()
+        {
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('b');
+            list.Append('c');
+
+            Exception exception = Assert.ThrowsException<IndexOutOfRangeException>(() => list.Insert('d', -1));
+        }
+
+        [TestMethod]
+        public void InsertExtra_MultipleElementList()
+        {
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('b');
+            list.Append('c');
+
+            Exception exception = Assert.ThrowsException<IndexOutOfRangeException>(() => list.Insert('d', 10));
+        }
+
+        [TestMethod]
         public void Length_InsertSingle()
         {
             int expected = 1;
@@ -295,6 +417,6 @@ namespace UnitTests
             int length = list.Length();
 
             Assert.AreEqual(expected, length);
-        }
+        }  
     }
 }
