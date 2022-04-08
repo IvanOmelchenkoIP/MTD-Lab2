@@ -1,7 +1,6 @@
-
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MTD_Lab2;
-
+using System;
 namespace UnitTests
 {
     [TestClass]
@@ -112,6 +111,121 @@ namespace UnitTests
             int length = list.Length();
 
             Assert.AreEqual(expected, length);
+        }
+
+        [TestMethod]
+        public void Get_InsertFirst()
+        {
+            char expected = 'a';
+
+            CircularList list = new CircularList();
+            list.Insert('a', 0);
+
+            char value = list.Get(0);
+
+            Assert.AreEqual(expected, value);
+        }
+
+
+        [TestMethod]
+        public void GetFirst_InsertMultiple()
+        {
+            char expected = 'i';
+
+            CircularList list = new CircularList();
+            list.Insert('a', 0);
+            list.Insert('b', 0);
+            list.Insert('c', 2);
+            list.Insert('d', 1);
+            list.Insert('e', 4);
+            list.Insert('f', 4);
+            list.Insert('g', 6);
+            list.Insert('h', 7);
+            list.Insert('i', 0);
+
+            char value = list.Get(0);
+
+            Assert.AreEqual(expected, value);
+        }
+
+        [TestMethod]
+        public void GetSecond_InsertMultiple()
+        {
+            char expected = 'd';
+
+            CircularList list = new CircularList();
+            list.Insert('a', 0);
+            list.Insert('b', 0);
+            list.Insert('c', 2);
+            list.Insert('d', 1);
+            list.Insert('e', 4);
+            list.Insert('f', 4);
+            list.Insert('g', 6);
+            list.Insert('h', 7);
+
+            char value = list.Get(1);
+
+            Assert.AreEqual(expected, value);
+        }
+        [TestMethod]
+        public void GetMiddle_InsertMultiple()
+        {
+            char expected = 'i';
+
+            CircularList list = new CircularList();
+            list.Insert('a', 0);
+            list.Insert('b', 0);
+            list.Insert('c', 2);
+            list.Insert('d', 1);
+            list.Insert('e', 4);
+            list.Insert('f', 4);
+            list.Insert('g', 6);
+            list.Insert('h', 7);
+            list.Insert('i', 4);
+
+            char value = list.Get(4);
+
+            Assert.AreEqual(expected, value);
+        }
+
+        [TestMethod]
+        public void GetPreLast_InsertMultiple()
+        {
+            char expected = 'g';
+
+            CircularList list = new CircularList();
+            list.Insert('a', 0);
+            list.Insert('b', 0);
+            list.Insert('c', 2);
+            list.Insert('d', 1);
+            list.Insert('e', 4);
+            list.Insert('f', 4);
+            list.Insert('g', 6);
+            list.Insert('h', 7);
+
+            char value = list.Get(6);
+
+            Assert.AreEqual(expected, value);
+        }
+
+        [TestMethod]
+        public void GetLast_InsertMultiple()
+        {
+            char expected = 'h';
+
+            CircularList list = new CircularList();
+            list.Insert('a', 0);
+            list.Insert('b', 0);
+            list.Insert('c', 2);
+            list.Insert('d', 1);
+            list.Insert('e', 4);
+            list.Insert('f', 4);
+            list.Insert('g', 6);
+            list.Insert('h', 7);
+
+            char value = list.Get(7);
+
+            Assert.AreEqual(expected, value);
         }
 
         [TestMethod]

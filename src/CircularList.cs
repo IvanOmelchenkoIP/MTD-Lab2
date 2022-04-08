@@ -27,45 +27,47 @@ namespace MTD_Lab2
                 head = new CharNode();
                 head.value = element;
                 head.next = head;
-
-                length++;
-                return;
             }
-
-            CharNode current = head;
-            while (true)
+            else
             {
-                if (current.next == head)
-                {
-                    CharNode tail = new CharNode();
+                CharNode current = head;
+                while (current.next != head) current = current.next;
+                
+                CharNode tail = new CharNode();
+                tail.value = element;
+                tail.next = head;
 
-                    tail.value = element;
-                    tail.next = head;
-                    current.next = tail;
-
-                    length++;
-                    return;
-                }
-                current = current.next;
+                current.next = tail;
             }
+            length++;
         }
 
         public void Insert(char element, int index)
         { 
             if (index > length || index < 0) throw new Exception("ERROR! Requesting to insert element by incorrect index!");
 
-            if (index == length) 
+            if (index == length)
             {
                 Append(element);
-                return;
             }
-
-            int counter = 0;
-            CharNode current = head;
-            while (true)
+            else
             {
-                if (counter == index) 
+                CharNode current = head;
+                if (index == 0)
                 {
+                    CharNode inserted = new CharNode();
+
+                    inserted.value = element;
+                    inserted.next = head;
+
+                    while (current.next != head) current = current.next;
+                    current.next = inserted;
+
+                    head = inserted;
+                }
+                else
+                {
+                    for (int counter = 0; counter < index - 1; counter++) current = current.next;
                     CharNode next = current.next;
 
                     CharNode inserted = new CharNode();
@@ -73,12 +75,8 @@ namespace MTD_Lab2
                     inserted.next = next;
 
                     current.next = inserted;
-
-                    length++;
-                    return;
                 }
-                current = current.next;
-                counter++;
+                length++;
             }
         }
 
@@ -168,18 +166,11 @@ namespace MTD_Lab2
             if (head == null) throw new Exception("ERROR! The Linked List is empty!");
             if (index >= length || index < 0) throw new Exception("ERROR! Element by incorrect index is requested!");
 
-            int counter = 0;
             CharNode current = head;
-            while (true)
-            {
-                if (counter == index)
-                {
-                    char value = current.value;
-                    return value;
-                }
-                current = current.next;
-                counter++;
-            }
+            for (int counter = 0; counter < index; counter++) current = current.next;
+
+            char value = current.value;
+            return value;
         }
 
         public CircularList Clone()
