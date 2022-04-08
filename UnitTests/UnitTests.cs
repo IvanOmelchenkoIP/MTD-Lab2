@@ -1181,6 +1181,180 @@ namespace UnitTests
             Assert.AreEqual(expected, index);
         }
 
+        [TestMethod]
+        public void Get_ReverseEmpty()
+        {
+            CircularList list = new CircularList();
+            list.Reverse();
 
+            Assert.ThrowsException<NullReferenceException>(() => list.Get(0));
+        }
+
+        [TestMethod]
+        public void Get_ReverseSingle()
+        {
+            char expected = 'a';
+
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Reverse();
+
+            int value = list.Get(0);
+
+            Assert.AreEqual(expected, value);
+        }
+
+        [TestMethod]
+        public void GetFirst_ReverseMultiple()
+        {
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('b');
+            list.Append('c');
+            list.Append('d');
+
+            char expected = list.Get(3);
+
+            list.Reverse();
+
+            int value = list.Get(0);
+
+            Assert.AreEqual(expected, value);
+        }
+
+        [TestMethod]
+        public void GetMiddle_ReverseMultiple()
+        {
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('b');
+            list.Append('c');
+            list.Append('d');
+            
+            char expected = list.Get(1);
+
+            list.Reverse();
+
+            int value = list.Get(2);
+
+            Assert.AreEqual(expected, value);
+        }
+
+        [TestMethod]
+        public void GetLast_ReverseMultiple()
+        {
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('b');
+            list.Append('c');
+            list.Append('d');
+
+            char expected = list.Get(0);
+
+            list.Reverse();
+
+            int value = list.Get(3);
+
+            Assert.AreEqual(expected, value);
+        }
+
+        [TestMethod]
+        public void Length_ReverseEmpty()
+        {
+            int expected = 0;
+
+            CircularList list = new CircularList();
+            list.Reverse();
+
+            int length = list.Length();
+
+            Assert.AreEqual(expected, length);
+        }
+
+        [TestMethod]
+        public void Length_ReverseSingle()
+        {
+            int expected = 1;
+
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Reverse();
+
+            int length = list.Length();
+
+            Assert.AreEqual(expected, length);
+        }
+
+        [TestMethod]
+        public void Length_ReverseMultiple()
+        {
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('b');
+            list.Append('c');
+            list.Append('d');
+
+            int expected = list.Length();
+
+            list.Reverse();
+
+            int length = list.Length();
+
+            Assert.AreEqual(expected, length);
+        }
+
+        [TestMethod]
+        public void CopmareFirstToLast_ReverseCloned()
+        {
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('b');
+            list.Append('c');
+            list.Append('d');
+
+            CircularList clone = list.Clone();
+            clone.Reverse();
+
+            char expected = list.Get(0);
+            char value = clone.Get(3);
+
+            Assert.AreEqual(expected, value);
+        }
+
+        [TestMethod]
+        public void CopmareLastToFirst_ReverseCloned()
+        {
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('b');
+            list.Append('c');
+            list.Append('d');
+
+            CircularList clone = list.Clone();
+            clone.Reverse();
+
+            char expected = list.Get(3);
+            char value = clone.Get(0);
+
+            Assert.AreEqual(expected, value);
+        }
+
+        [TestMethod]
+        public void CopmareMiddle_ReverseCloned()
+        {
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('b');
+            list.Append('c');
+            list.Append('d');
+
+            CircularList clone = list.Clone();
+            clone.Reverse();
+
+            char expected = list.Get(2);
+            char value = clone.Get(1);
+
+            Assert.AreEqual(expected, value);
+        }
     }
 }
