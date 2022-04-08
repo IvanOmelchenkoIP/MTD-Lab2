@@ -909,5 +909,278 @@ namespace UnitTests
 
             Assert.AreEqual(expected, value);
         }
+
+        [TestMethod]
+        public void FindLast_EmptyList()
+        {
+            int expected = -1;
+
+            CircularList list = new CircularList();
+
+            int index = list.FindLast('a');
+
+            Assert.AreEqual(expected, index);
+        }
+
+        [TestMethod]
+        public void FindLast_OneElement()
+        {
+            int expected = 0;
+
+            CircularList list = new CircularList();
+            list.Append('b');
+
+            int index = list.FindLast('b');
+
+            Assert.AreEqual(expected, index);
+        }
+
+        [TestMethod]
+        public void FindLast_TwoElementsSame()
+        {
+            int expected = 2;
+
+            CircularList list = new CircularList();
+            list.Append('b');
+            list.Append('b');
+            list.Append('b');
+
+            int index = list.FindLast('b');
+
+            Assert.AreEqual(expected, index);
+        }
+
+        [TestMethod]
+        public void FindLast_SingleSuitableFirst()
+        {
+            int expected = 0;
+
+            CircularList list = new CircularList();
+            list.Append('b');
+            list.Append('a');
+            list.Append('c');
+
+            int index = list.FindLast('b');
+
+            Assert.AreEqual(expected, index);
+        }
+
+        [TestMethod]
+        public void FindLast_SingleSuitableMiddle()
+        {
+            int expected = 2;
+
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('c');
+            list.Append('b');
+            list.Append('d');
+
+            int index = list.FindLast('b');
+
+            Assert.AreEqual(expected, index);
+        }
+
+        [TestMethod]
+        public void FindLast_SingleSuitableLast()
+        {
+            int expected = 3;
+
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('c');
+            list.Append('d');
+            list.Append('b');
+
+            int index = list.FindLast('b');
+
+            Assert.AreEqual(expected, index);
+        }
+
+        [TestMethod]
+        public void FindLast_MultipleSuitableLast()
+        {
+            int expected = 4;
+
+            CircularList list = new CircularList();
+            list.Append('b');
+            list.Append('a');
+            list.Append('c');
+            list.Append('a');
+            list.Append('b');
+
+            int index = list.FindLast('b');
+
+            Assert.AreEqual(expected, index);
+        }
+
+        [TestMethod]
+        public void FindLast_MultipleSuitableMiddle()
+        {
+            int expected = 2;
+
+            CircularList list = new CircularList();
+            list.Append('b');
+            list.Append('c');
+            list.Append('b');
+            list.Append('a');
+            list.Append('w');
+
+            int index = list.FindLast('b');
+
+            Assert.AreEqual(expected, index);
+        }
+
+        [TestMethod]
+        public void FindLast_NoSuitable()
+        {
+            int expected = -1;
+
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('c');
+            list.Append('a');
+
+            int index = list.FindLast('b');
+
+            Assert.AreEqual(expected, index);
+        }
+
+        [TestMethod]
+        public void FindFirst_EmptyList()
+        {
+            int expected = -1;
+
+            CircularList list = new CircularList();
+
+            int index = list.FindFirst('a');
+
+            Assert.AreEqual(expected, index);
+        }
+
+        [TestMethod]
+        public void FindFirst_OneElement()
+        {
+            int expected = 0;
+
+            CircularList list = new CircularList();
+            list.Append('b');
+
+            int index = list.FindFirst('b');
+
+            Assert.AreEqual(expected, index);
+        }
+
+        [TestMethod]
+        public void FindFirst_TwoElementsSame()
+        {
+            int expected = 0;
+
+            CircularList list = new CircularList();
+            list.Append('b');
+            list.Append('b');
+
+            int index = list.FindFirst('b');
+
+            Assert.AreEqual(expected, index);
+        }
+
+        [TestMethod]
+        public void FindFirst_SingleSuitableFirst()
+        {
+            int expected = 0;
+
+            CircularList list = new CircularList();
+            list.Append('b');
+            list.Append('a');
+            list.Append('c');
+
+            int index = list.FindFirst('b');
+
+            Assert.AreEqual(expected, index);
+        }
+
+        [TestMethod]
+        public void FindFirst_SingleSuitableMiddle()
+        {
+            int expected = 2;
+
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('c');
+            list.Append('b');
+            list.Append('d');
+
+            int index = list.FindFirst('b');
+
+            Assert.AreEqual(expected, index);
+        }
+
+        [TestMethod]
+        public void FindFirst_SingleSuitableLast()
+        {
+            int expected = 3;
+
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('c');
+            list.Append('d');
+            list.Append('b');
+
+            int index = list.FindFirst('b');
+
+            Assert.AreEqual(expected, index);
+        }
+
+        [TestMethod]
+        public void FindFirst_MultipleSuitableFirst()
+        {
+            int expected = 0;
+
+            CircularList list = new CircularList();
+            list.Append('b');
+            list.Append('a');
+            list.Append('c');
+            list.Append('a');
+            list.Append('b');
+
+            int index = list.FindFirst('b');
+
+            Assert.AreEqual(expected, index);
+        }
+
+        [TestMethod]
+        public void FindFirst_MultipleSuitableMiddle()
+        {
+            int expected = 2;
+
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('c');
+            list.Append('b');
+            list.Append('a');
+            list.Append('b');
+
+            int index = list.FindFirst('b');
+
+            Assert.AreEqual(expected, index);
+        }
+
+        [TestMethod]
+        public void FindFirst_NoSuitable()
+        {
+            int expected = -1;
+
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('c');
+            list.Append('a');
+
+            int index = list.FindFirst('b');
+
+            Assert.AreEqual(expected, index);
+        }
+
+
     }
 }

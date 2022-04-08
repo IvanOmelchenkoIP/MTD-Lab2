@@ -219,11 +219,10 @@ namespace MTD_Lab2
         }
 
         public int FindFirst(char element)
-        {
+        {         
             int index = -1;
-            int counter = 0;
             CharNode current = head;
-            while (current.next != head)
+            for (int counter = 0; counter < length; counter++)
             {
                 if (current.value == element)
                 {
@@ -231,7 +230,6 @@ namespace MTD_Lab2
                     break;
                 }
                 current = current.next;
-                counter++;
             }
             return index;
         }
@@ -239,14 +237,11 @@ namespace MTD_Lab2
         public int FindLast(char element)
         {
             int index = -1;
-            int counter = 0;
             CharNode current = head;
-            while (current.next != head)
+            for (int counter = 0; counter < length; counter++)
             {
                 if (current.value == element) index = counter;
-
                 current = current.next;
-                counter++;
             }
             return index;
         }
