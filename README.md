@@ -1,5 +1,7 @@
 # Methodologies and Technologies of Program Development - Laboratory work 2
 
+Unit Testing Status: [![Test](https://github.com/IvanOmelchenkoIP/MTD-Lab2/actions/workflows/tests.yml/badge.svg)](https://github.com/IvanOmelchenkoIP/MTD-Lab2/actions/workflows/tests.yml)
+
 ## General Description
 
 The program is an implementation of a Linked List that works with the values of type **char** with the following methods:
@@ -73,4 +75,6 @@ For example:
     dotnet test UnitTests\UnitTests.csproj
 
 ## Failed CI Commit
+
+[Link to Failed CI Commit](https://github.com/IvanOmelchenkoIP/MTD-Lab2/commit/a03e634011f8270d88448a04a382c745db043dd2)
 
