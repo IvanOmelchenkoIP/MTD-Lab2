@@ -1356,5 +1356,243 @@ namespace UnitTests
 
             Assert.AreEqual(expected, value);
         }
+
+        [TestMethod]
+        public void GetFirst_ClearMultiple()
+        {
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('b');
+            list.Append('c');
+
+            list.Clear();
+
+            Assert.ThrowsException<NullReferenceException>(() => list.Get(0));
+        }
+
+        [TestMethod]
+        public void GetMiddle_ClearMultiple()
+        {
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('b');
+            list.Append('c');
+
+            list.Clear();
+
+            Assert.ThrowsException<NullReferenceException>(() => list.Get(1));
+        }
+        [TestMethod]
+        public void GetFirst_ClearMultipleSeveralTimes()
+        {
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('b');
+            list.Append('c');
+
+            list.Clear();
+            list.Clear();
+            list.Clear();
+
+            Assert.ThrowsException<NullReferenceException>(() => list.Get(0));
+        }
+
+        [TestMethod]
+        public void GetMiddle_ClearMultipleSeveralTimes()
+        {
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('b');
+            list.Append('c');
+
+            list.Clear();
+            list.Clear();
+            list.Clear();
+
+            Assert.ThrowsException<NullReferenceException>(() => list.Get(1));
+        }
+
+        [TestMethod]
+        public void Get_ClearEmptyList()
+        {
+            CircularList list = new CircularList();
+
+            list.Clear();
+
+            Assert.ThrowsException<NullReferenceException>(() => list.Get(0));
+        }
+
+        [TestMethod]
+        public void Get_ClearSingle()
+        {
+            CircularList list = new CircularList();
+            list.Append('a');
+
+            list.Clear();
+
+            Assert.ThrowsException<NullReferenceException>(() => list.Get(0));
+        }
+        [TestMethod]
+        public void Length_ClearMultiple()
+        {
+            int expected = 0;
+
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('b');
+
+            list.Clear();
+
+            int length = list.Length();
+
+            Assert.AreEqual(expected, length);
+        }
+
+        [TestMethod]
+        public void Length_ClearEmptyList()
+        {
+            int expected = 0;
+
+            CircularList list = new CircularList();
+
+            list.Clear();
+
+            int length = list.Length();
+
+            Assert.AreEqual(expected, length);
+        }
+
+        [TestMethod]
+        public void Length_ClearMultipleSeveralTimes()
+        {
+            int expected = 0;
+
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('b');
+            list.Append('c');
+            list.Append('d');
+
+            list.Clear();
+            list.Clear();
+            list.Clear();
+
+            int length = list.Length();
+
+            Assert.AreEqual(expected, length);
+        }
+
+        [TestMethod]
+        public void LengthClone_ClearMultipleClone()
+        {
+            int expected = 0;
+
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('b');
+            list.Append('c');
+
+            CircularList clone = list.Clone();
+
+            clone.Clear();
+
+            int length = clone.Length();
+
+            Assert.AreEqual(expected, length);
+        }
+
+        [TestMethod]
+        public void LengthOriginal_ClearMultipleClone()
+        {
+            int expected = 3;
+
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('b');
+            list.Append('c');
+
+            CircularList clone = list.Clone();
+
+            clone.Clear();
+
+            int length = list.Length();
+
+            Assert.AreEqual(expected, length);
+        }
+
+        [TestMethod]
+        public void LengthClone_ClearMultipleOriginal()
+        {
+            int expected = 3;
+
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('b');
+            list.Append('c');
+
+            CircularList clone = list.Clone();
+
+            list.Clear();
+
+            int length = clone.Length();
+
+            Assert.AreEqual(expected, length);
+        }
+
+        [TestMethod]
+        public void LengthOriginal_ClearMultipleOriginal()
+        {
+            int expected = 0;
+
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('b');
+            list.Append('c');
+
+            CircularList clone = list.Clone();
+
+            list.Clear();
+
+            int length = list.Length();
+
+            Assert.AreEqual(expected, length);
+        }
+
+        [TestMethod]
+        public void CompareLength_ClearMultipleClone()
+        {
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('b');
+            list.Append('c');
+
+            CircularList clone = list.Clone();
+
+            clone.Clear();
+
+            int expected = list.Length();
+            int length = clone.Length();
+
+            Assert.AreNotEqual(expected, length);
+        }
+
+        [TestMethod]
+        public void CompareLength_ClearMultipleOriginal()
+        {
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('b');
+            list.Append('c');
+
+            CircularList clone = list.Clone();
+
+            list.Clear();
+
+            int expected = list.Length();
+            int length = clone.Length();
+
+            Assert.AreNotEqual(expected, length);
+        }
+
     }
 }
