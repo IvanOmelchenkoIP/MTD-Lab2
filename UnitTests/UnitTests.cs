@@ -1594,5 +1594,588 @@ namespace UnitTests
             Assert.AreNotEqual(expected, length);
         }
 
+        [TestMethod]
+        public void AreNotSame_ExtendEmptyByEmpty()
+        {
+            CircularList extended = new CircularList();
+            CircularList extender = new CircularList();
+
+            extended.Extend(extender);
+
+            Assert.AreNotEqual(extended, extender);
+        }
+
+        [TestMethod]
+        public void AreNotSame_ExtendByEmpty()
+        {
+            CircularList extended = new CircularList();
+            CircularList extender = new CircularList();
+
+            extended.Append('a');
+            extended.Append('b');
+            extended.Append('c');
+
+            extended.Extend(extender);
+
+            Assert.AreNotSame(extended, extender);
+        }
+
+        [TestMethod]
+        public void AreNotSame_ExtendToEmpty()
+        {
+            CircularList extended = new CircularList();
+            CircularList extender = new CircularList();
+
+            extender.Append('a');
+            extender.Append('b');
+            extender.Append('c');
+
+            extended.Extend(extender);
+
+            Assert.AreNotSame(extended, extender);
+        }
+        
+        [TestMethod]
+        public void Length_ExtendByEmpty()
+        {
+            int expected = 2;
+
+            CircularList extended = new CircularList();
+            CircularList extender = new CircularList();
+
+            extended.Append('a');
+            extended.Append('b');
+
+            extended.Extend(extender);
+
+            int length = extended.Length();
+
+            Assert.AreEqual(expected, length);
+        }
+
+        [TestMethod]
+        public void Length_ExtendToEmpty()
+        {
+            int expected = 3;
+
+            CircularList extended = new CircularList();
+            CircularList extender = new CircularList();
+
+            extender.Append('a');
+            extender.Append('b');
+            extender.Append('c');
+
+            extended.Extend(extender);
+
+            int length = extended.Length();
+
+            Assert.AreEqual(expected, length);
+        }
+
+        [TestMethod]
+        public void Length_ExtendEmptyByEmpty()
+        {
+            int expected = 0;
+
+            CircularList extended = new CircularList();
+            CircularList extender = new CircularList();
+
+            extended.Extend(extender);
+
+            int length = extended.Length();
+
+            Assert.AreEqual(expected, length);
+        }
+
+        [TestMethod]
+        public void Length_ExtendFullByFull()
+        {
+            int expected = 5;
+
+            CircularList extended = new CircularList();
+            CircularList extender = new CircularList();
+
+            extended.Append('a');
+            extended.Append('b');
+
+            extender.Append('c');
+            extender.Append('d');
+            extender.Append('e');
+
+            extended.Extend(extender);
+
+            int length = extended.Length();
+
+            Assert.AreEqual(expected, length);
+        }
+
+        [TestMethod]
+        public void GetFirstExtended_ExtendByEmpty()
+        {
+            char expected = 'a';
+
+            CircularList extended = new CircularList();
+            CircularList extender = new CircularList();
+
+            extended.Append('a');
+            extended.Append('b');
+
+            extended.Extend(extender);
+
+            char value = extended.Get(0);
+
+            Assert.AreEqual(expected, value);
+        }
+
+        [TestMethod]
+        public void GetLastExtended_ExtendByEmpty()
+        {
+            char expected = 'c';
+
+            CircularList extended = new CircularList();
+            CircularList extender = new CircularList();
+
+            extended.Append('a');
+            extended.Append('b');
+            extended.Append('c');
+
+            extended.Extend(extender);
+
+            char value = extended.Get(2);
+
+            Assert.AreEqual(expected, value);
+        }
+
+        [TestMethod]
+        public void GetFirstExtended_ExtendToEmpty()
+        {
+            char expected = 'a';
+
+            CircularList extended = new CircularList();
+            CircularList extender = new CircularList();
+
+            extender.Append('a');
+            extender.Append('b');
+
+            extended.Extend(extender);
+
+            char listValue = extended.Get(0);
+
+            Assert.AreEqual(expected, listValue);
+        }
+
+        [TestMethod]
+        public void GetLastExtender_ExtendByEmpty()
+        {
+            char expected = 'c';
+
+            CircularList extended = new CircularList();
+            CircularList extender = new CircularList();
+
+            extender.Append('a');
+            extender.Append('b');
+            extender.Append('c');
+
+            extended.Extend(extender);
+
+            char listValue = extended.Get(2);
+
+            Assert.AreEqual(expected, listValue);
+        }
+
+        [TestMethod]
+        public void Get_ExtendEmptyByEmpty()
+        {
+            CircularList extended = new CircularList();
+            CircularList extender = new CircularList();
+
+            extended.Extend(extender);
+
+            Assert.ThrowsException<NullReferenceException>(() => extended.Get(0));
+        }
+
+        [TestMethod]
+        public void GetFirstExtended_InExtended()
+        {
+            char expected = 'a';
+
+            CircularList extended = new CircularList();
+            CircularList extender = new CircularList();
+
+            extended.Append('a');
+            extended.Append('b');
+            extended.Append('c');
+
+            extender.Append('d');
+            extender.Append('e');
+            extender.Append('f');
+
+            extended.Extend(extender);
+
+            char listValue = extended.Get(0);
+
+            Assert.AreEqual(expected, listValue);
+        }
+
+        [TestMethod]
+        public void GetLastExtended_InExtended()
+        {
+            char expected = 'c';
+
+            CircularList extended = new CircularList();
+            CircularList extender = new CircularList();
+
+            extended.Append('a');
+            extended.Append('b');
+            extended.Append('c');
+
+            extender.Append('d');
+            extender.Append('e');
+            extender.Append('f');
+
+            extended.Extend(extender);
+
+            char listValue = extended.Get(2);
+
+            Assert.AreEqual(expected, listValue);
+        }
+
+        [TestMethod]
+        public void GetFirstExtender_InExtender()
+        {
+            char expected = 'd';
+
+            CircularList extended = new CircularList();
+            CircularList extender = new CircularList();
+
+            extended.Append('a');
+            extended.Append('b');
+            extended.Append('c');
+
+            extender.Append('d');
+            extender.Append('e');
+            extender.Append('f');
+
+            extended.Extend(extender);
+
+            char listValue = extended.Get(3);
+
+            Assert.AreEqual(expected, listValue);
+        }
+
+        [TestMethod]
+        public void GetLastExtender_InExtended()
+        {
+            char expected = 'f';
+
+            CircularList extended = new CircularList();
+            CircularList extender = new CircularList();
+
+            extended.Append('a');
+            extended.Append('b');
+            extended.Append('c');
+
+            extender.Append('d');
+            extender.Append('e');
+            extender.Append('f');
+
+            extended.Extend(extender);
+
+            char listValue = extended.Get(5);
+
+            Assert.AreEqual(expected, listValue);
+        }
+
+        [TestMethod]
+        public void LengthExtender_ClearExtender()
+        {
+            int expected = 0;
+
+            CircularList extended = new CircularList();
+            CircularList extender = new CircularList();
+
+            extended.Append('a');
+            extended.Append('b');
+            extended.Append('c');
+
+            extender.Append('d');
+            extender.Append('e');
+            extender.Append('f');
+
+            extended.Extend(extender);
+
+            extender.Clear();
+
+            int length = extender.Length();
+
+            Assert.AreEqual(expected, length);
+        }
+
+        [TestMethod]
+        public void LengthExtended_ClearExtender()
+        {
+            int expected = 6;
+
+            CircularList extended = new CircularList();
+            CircularList extender = new CircularList();
+
+            extended.Append('a');
+            extended.Append('b');
+            extended.Append('c');
+
+            extender.Append('d');
+            extender.Append('e');
+            extender.Append('f');
+
+            extended.Extend(extender);
+
+            extender.Clear();
+
+            int length = extended.Length();
+
+            Assert.AreEqual(expected, length);
+        }
+
+        [TestMethod]
+        public void LengthExtender_ClearExtended()
+        {
+            int expected = 3;
+
+            CircularList extended = new CircularList();
+            CircularList extender = new CircularList();
+
+            extended.Append('a');
+            extended.Append('b');
+            extended.Append('c');
+
+            extender.Append('d');
+            extender.Append('e');
+            extender.Append('f');
+
+            extended.Extend(extender);
+
+            extended.Clear();
+
+            int length = extender.Length();
+
+            Assert.AreEqual(expected, length);
+        }
+
+        [TestMethod]
+        public void LengthExtended_ClearExtended()
+        {
+            int expected = 0;
+
+            CircularList extended = new CircularList();
+            CircularList extender = new CircularList();
+
+            extended.Append('a');
+            extended.Append('b');
+            extended.Append('c');
+
+            extender.Append('d');
+            extender.Append('e');
+            extender.Append('f');
+
+            extended.Extend(extender);
+
+            extended.Clear();
+
+            int length = extended.Length();
+
+            Assert.AreEqual(expected, length);
+        }
+
+        [TestMethod]
+        public void CompareLength_ClearExtender()
+        {
+            CircularList extended = new CircularList();
+            CircularList extender = new CircularList();
+
+            extended.Append('a');
+            extended.Append('b');
+            extended.Append('c');
+
+            extender.Append('d');
+            extender.Append('e');
+            extender.Append('f');
+
+            extended.Extend(extender);
+
+            extender.Clear();
+
+            int expected = extended.Length();
+            int length = extender.Length();
+
+            Assert.AreNotEqual(expected, length);
+        }
+
+        [TestMethod]
+        public void CompareLength_ClearExtended()
+        {
+            CircularList extended = new CircularList();
+            CircularList extender = new CircularList();
+
+            extended.Append('a');
+            extended.Append('b');
+            extended.Append('c');
+
+            extender.Append('d');
+            extender.Append('e');
+            extender.Append('f');
+
+            extended.Extend(extender);
+
+            extended.Clear();
+
+            int expected = extended.Length();
+            int length = extender.Length();
+
+            Assert.AreNotEqual(expected, length);
+        }
+
+        [TestMethod]
+        public void CompareLength_ExtendToClone()
+        {
+            CircularList list = new CircularList();
+            CircularList extender = new CircularList();
+
+            list.Append('a');
+            list.Append('b');
+            list.Append('c');
+
+            extender.Append('d');
+            extender.Append('e');
+            extender.Append('f');
+
+            CircularList clone = list.Clone();
+
+            clone.Extend(extender);
+
+            int expected = list.Length();
+            int length = clone.Length();
+
+            Assert.AreNotEqual(expected, length);
+        }
+
+        [TestMethod]
+        public void CompareLength_ExtendToOriginal()
+        {
+            CircularList list = new CircularList();
+            CircularList extender = new CircularList();
+
+            list.Append('a');
+            list.Append('b');
+            list.Append('c');
+
+            extender.Append('d');
+            extender.Append('e');
+            extender.Append('f');
+
+            CircularList clone = list.Clone();
+
+            list.Extend(extender);
+
+            int expected = list.Length();
+            int length = clone.Length();
+
+            Assert.AreNotEqual(expected, length);
+        }
+
+        [TestMethod]
+        public void LengthOriginal_ExtendToClone()
+        {
+            int expected = 3;
+            CircularList list = new CircularList();
+            CircularList extender = new CircularList();
+
+            list.Append('a');
+            list.Append('b');
+            list.Append('c');
+
+            extender.Append('d');
+            extender.Append('e');
+            extender.Append('f');
+
+            CircularList clone = list.Clone();
+
+            clone.Extend(extender);
+
+            int length = list.Length();
+
+            Assert.AreEqual(expected, length);
+        }
+
+        [TestMethod]
+        public void LengthClone_ExtendToClone()
+        {
+            int expected = 6;
+            CircularList list = new CircularList();
+            CircularList extender = new CircularList();
+
+            list.Append('a');
+            list.Append('b');
+            list.Append('c');
+
+            extender.Append('d');
+            extender.Append('e');
+            extender.Append('f');
+
+            CircularList clone = list.Clone();
+
+            clone.Extend(extender);
+
+            int length = clone.Length();
+
+            Assert.AreEqual(expected, length);
+        }
+
+        [TestMethod]
+        public void LengthOriginal_ExtendToOriginal()
+        {
+            int expected = 6;
+            CircularList list = new CircularList();
+            CircularList extender = new CircularList();
+
+            list.Append('a');
+            list.Append('b');
+            list.Append('c');
+
+            extender.Append('d');
+            extender.Append('e');
+            extender.Append('f');
+
+            CircularList clone = list.Clone();
+
+            list.Extend(extender);
+
+            int length = list.Length();
+
+            Assert.AreEqual(expected, length);
+        }
+
+        [TestMethod]
+        public void LengthClone_ExtendToOriginal()
+        {
+            int expected = 3;
+            CircularList list = new CircularList();
+            CircularList extender = new CircularList();
+
+            list.Append('a');
+            list.Append('b');
+            list.Append('c');
+
+            extender.Append('d');
+            extender.Append('e');
+            extender.Append('f');
+
+            CircularList clone = list.Clone();
+
+            list.Extend(extender);
+
+            int length = clone.Length();
+
+            Assert.AreEqual(expected, length);
+        }
     }
 }
