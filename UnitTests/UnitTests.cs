@@ -423,7 +423,7 @@ namespace UnitTests
         public void AreNotSame_CloneEmpty()
         {
             CircularList list = new CircularList();
-            
+
             CircularList clone = list.Clone();
 
             Assert.AreNotSame(list, clone);
@@ -497,7 +497,7 @@ namespace UnitTests
             list.Append('c');
             list.Append('d');
             list.Append('e');
-            
+
             char expected = list.Get(1);
 
             CircularList clone = list.Clone();
@@ -572,7 +572,7 @@ namespace UnitTests
 
             Assert.AreEqual(expected, length);
         }
-        
+
         [TestMethod]
         public void Length_CloneSingle()
         {
@@ -762,7 +762,7 @@ namespace UnitTests
 
 
             CircularList clone = list.Clone();
-            
+
             list.Append('f');
             int expected = list.Length();
 
@@ -883,7 +883,7 @@ namespace UnitTests
             list.Append('c');
 
             CircularList clone = list.Clone();
-            
+
             list.Insert('d', 1);
 
             char value = list.Get(1);
@@ -902,7 +902,7 @@ namespace UnitTests
             list.Append('c');
 
             CircularList clone = list.Clone();
-            
+
             list.Insert('d', 1);
 
             char value = clone.Get(1);
@@ -1230,7 +1230,7 @@ namespace UnitTests
             list.Append('b');
             list.Append('c');
             list.Append('d');
-            
+
             char expected = list.Get(1);
 
             list.Reverse();
@@ -1634,7 +1634,7 @@ namespace UnitTests
 
             Assert.AreNotSame(extended, extender);
         }
-        
+
         [TestMethod]
         public void Length_ExtendByEmpty()
         {

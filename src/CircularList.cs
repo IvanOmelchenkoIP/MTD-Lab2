@@ -44,7 +44,7 @@ namespace MTD_Lab2
 
         public void Insert(char element, int index)
         { 
-            if (index > length || index < 0) throw new IndexOutOfRangeException("ERROR! Requested to insert element by incorrect index!");
+            if (index > length || index < 0) throw new IndexOutOfRangeException("ERROR! Requested to insert an element by incorrect index!");
 
             if (index == length)
             {
@@ -81,8 +81,8 @@ namespace MTD_Lab2
 
         public char Delete(int index)
         {
-            if (head == null) throw new Exception("ERROR! Can`t delete any element of an empty Linked List!");
-            if (index >= length || index < 0) throw new Exception("ERROR! Requested to delete an element by incorrect index!");
+            if (head == null) throw new NullReferenceException("ERROR! Requested to delete an element in empty Linked List!");
+            if (index >= length || index < 0) throw new IndexOutOfRangeException("ERROR! Requested to delete an element by incorrect index!");
 
             if (head.next == head)
             {
@@ -162,7 +162,7 @@ namespace MTD_Lab2
 
         public char Get(int index)
         {
-            if (head == null) throw new NullReferenceException("ERROR! Requested to get element in an empty Linked List!");
+            if (head == null) throw new NullReferenceException("ERROR! Requested to get an element in empty Linked List!");
             if (index >= length || index < 0) throw new IndexOutOfRangeException("ERROR! Requested to get an element by incorrect index!");
 
             CharNode current = head;
