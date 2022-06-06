@@ -84,79 +84,71 @@ namespace MTD_Lab2
             if (head == null) throw new NullReferenceException("ERROR! Requested to delete an element in empty Linked List!");
             if (index >= length || index < 0) throw new IndexOutOfRangeException("ERROR! Requested to delete an element by incorrect index!");
 
-            if (head.next == head)
+            char value;
+            if (length == 1)
             {
-                char value = head.value;
+                value = head.value;
                 head = null;
-
                 length = 0;
                 return value;
             }
 
-            int counter = 0;
             CharNode current = head;
-            CharNode deleted = current.next;
-            while (true)
+            if (index == 0)
             {
-                if (counter == index - 1)
-                {
-                    CharNode next = deleted.next;
+                value = current.value;
+                while (current.next != head) current = current.next;
 
-                    char value = deleted.value;
-                    current.next = next;
+                head = head.next;
+                current.next = head;
 
-                    length--;
-                    return value;
-                }
-                current = current.next;
-                deleted = current.next;
-                counter++;
+                length--;
+                return value;
             }
+            else
+            {
+                CharNode deleted = current.next;
+                for (int i = 0; i < index - 1; i++)
+                {
+                    current = current.next;
+                    deleted = current.next;
+                }
+                value = deleted.value;
+
+                current.next = deleted.next;
+                length--;
+            }
+            return value;
         }
 
         public void DeleteAll(char element)
         {
             if (head == null) return;
 
-            CharNode current = head;
-            CharNode previous = null;
-            CharNode next = current.next;
             while (true)
             {
-                if (current.value == element)
+                if (length == 1)
                 {
-                    if (current == head)
-                    {
-                        if (current.next == head)
-                        {
-                            head = null;
-                            return;
-                        }
-                        else
-                        {
-                            CharNode tmp = head;
-                            while (true)
-                            {
-                                if (tmp.next == head)
-                                {
-                                    tmp.next = next;
-                                    break;
-                                }
-                                tmp = tmp.next;
-                            }
-                            head = next;
-                        }
-                        length--;
-                    }
-                    else
-                    {
-                        previous.next = next;
-                    }
+                    if (head.value != element) return;
+                    head = null;
+                    length = 0;
+                    return;
                 }
-                if (current.next == head) return;
-                previous = current;
-                current = current.next;
-                next = current.next;
+
+                bool found = false;
+                CharNode current = head;
+                for (int counter = 0; counter < length; counter++)
+                {
+                    if (current.value == element)
+                    {
+                        Delete(counter);
+                        found = true;
+                        break;
+                    }
+                    current = current.next;
+                }
+                if (found == true) continue;
+                return;
             }
         }
 

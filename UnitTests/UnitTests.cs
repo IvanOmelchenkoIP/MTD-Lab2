@@ -2177,5 +2177,870 @@ namespace UnitTests
 
             Assert.AreEqual(expected, length);
         }
+
+        [TestMethod]
+        public void GetFirst_DeleteFirst()
+        {
+            int expected = 'b';
+
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('b');
+            list.Append('c');
+
+            list.Delete(0);
+
+            int listValue = list.Get(0);
+
+            Assert.AreEqual(expected, listValue);
+        }
+
+        [TestMethod]
+        public void GetMiddle_DeleteMiddle()
+        {
+            char expected = 'c';
+
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('b');
+            list.Append('c');
+
+            list.Delete(1);
+
+            char value = list.Get(1);
+
+            Assert.AreEqual(expected, value);
+        }
+
+        [TestMethod]
+        public void GetLast_DeleteLast()
+        {
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('b');
+            list.Append('c');
+
+            list.Delete(2);
+
+            Assert.ThrowsException<IndexOutOfRangeException>(() => list.Get(2));
+        }
+
+        [TestMethod]
+        public void Get_DeleteOnlyElement()
+        {
+            CircularList list = new CircularList();
+            list.Append('a');
+
+            list.Delete(0);
+            Assert.ThrowsException<NullReferenceException>(() => list.Get(0));
+        }
+
+        [TestMethod]
+        public void Delete_EmptyList()
+        {
+            CircularList list = new CircularList();
+
+            Assert.ThrowsException<NullReferenceException>(() => list.Delete(0));
+        }
+
+        [TestMethod]
+        public void DeleteNegative_MultipleList()
+        {
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('b');
+            list.Append('c');
+
+            Assert.ThrowsException<IndexOutOfRangeException>(() => list.Delete(-1));
+        }
+
+        [TestMethod]
+        public void DeleteExtra_MultipleList()
+        {
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('b');
+            list.Append('c');
+
+            Assert.ThrowsException<IndexOutOfRangeException>(() => list.Delete(3));
+        }
+
+        [TestMethod]
+        public void Length_DeleteOnlyElement()
+        {
+            int expected = 0;
+
+            CircularList list = new CircularList();
+            list.Append('a');
+
+            list.Delete(0);
+
+            int length = list.Length();
+
+            Assert.AreEqual(expected, length);
+        }
+
+        [TestMethod]
+        public void Length_MultipleListDeleteSingle()
+        {
+            int expected = 2;
+
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('b');
+            list.Append('c');
+
+            list.Delete(1);
+
+            int length = list.Length();
+
+            Assert.AreEqual(expected, length);
+        }
+
+        [TestMethod]
+        public void Length_MultipleListDeleteMultiple()
+        {
+            int expected = 2;
+
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('b');
+            list.Append('c');
+            list.Append('d');
+
+            list.Delete(1);
+            list.Delete(0);
+
+            int length = list.Length();
+
+            Assert.AreEqual(expected, length);
+        }
+
+        [TestMethod]
+        public void Length_MultipleListDeleteMultipleToClear()
+        {
+            int expected = 0;
+
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('b');
+            list.Append('c');
+            list.Append('d');
+
+            list.Delete(0);
+            list.Delete(0);
+            list.Delete(0);
+            list.Delete(0);
+
+            int length = list.Length();
+
+            Assert.AreEqual(expected, length);
+        }
+
+        [TestMethod]
+        public void CompareFirst_DeleteSingleInClone()
+        {
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('b');
+            list.Append('c');
+            list.Append('d');
+
+            CircularList clone = list.Clone();
+            clone.Delete(0);
+
+            char expected = list.Get(0);
+            char value = clone.Get(0);
+
+            Assert.AreNotEqual(expected, value);
+        }
+
+        [TestMethod]
+        public void CompareMiddle_DeleteSingleInOriginal()
+        {
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('b');
+            list.Append('c');
+            list.Append('d');
+
+            CircularList clone = list.Clone();
+
+            list.Delete(1);
+
+            char expected = list.Get(1);
+            char value = clone.Get(1);
+
+            Assert.AreNotEqual(expected, value);
+        }
+
+        [TestMethod]
+        public void CompareLength_DeleteSingleInClone()
+        {
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('b');
+            list.Append('c');
+            list.Append('d');
+
+            CircularList clone = list.Clone();
+
+            clone.Delete(2);
+
+            int expected = list.Length();
+            int length = clone.Length();
+
+            Assert.AreNotEqual(expected, length);
+        }
+
+        [TestMethod]
+        public void CompareLength_DeleteMultipleInOriginal()
+        {
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('b');
+            list.Append('c');
+            list.Append('d');
+
+            CircularList clone = list.Clone();
+
+            list.Delete(0);
+            list.Delete(2);
+
+            int expected = list.Length();
+            int length = clone.Length();
+
+            Assert.AreNotEqual(expected, length);
+        }
+
+        [TestMethod]
+        public void LengthOriginal_DeleteMultipleInOriginal()
+        {
+            int expected = 2;
+
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('b');
+            list.Append('c');
+            list.Append('d');
+
+            CircularList clone = list.Clone();
+
+            list.Delete(0);
+            list.Delete(2);
+
+            int length = list.Length();
+
+            Assert.AreEqual(expected, length);
+        }
+
+        [TestMethod]
+        public void LengthClone_DeleteMultipleInOriginal()
+        {
+            int expected = 4;
+
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('b');
+            list.Append('c');
+            list.Append('d');
+
+            CircularList clone = list.Clone();
+
+            list.Delete(0);
+            list.Delete(2);
+
+            int length = clone.Length();
+
+            Assert.AreEqual(expected, length);
+        }
+
+        [TestMethod]
+        public void Get_DeleteAllEmptyList()
+        {
+            CircularList list = new CircularList();
+            list.DeleteAll('a');
+
+            Assert.ThrowsException<NullReferenceException>(() => list.Get(0));
+        }
+
+        [TestMethod]
+        public void Get_DeleteAllNoSuitable()
+        {
+            char expected = 'a';
+
+            CircularList list = new CircularList();
+            list.Append('a');
+
+            list.DeleteAll('b');
+
+            char value = list.Get(0);
+            Assert.AreEqual(expected, value);
+        }
+
+        [TestMethod]
+        public void Length_DeleteAllEmptyList()
+        {
+            int expected = 0;
+
+            CircularList list = new CircularList();
+            list.DeleteAll('a');
+
+            int listLength = list.Length();
+
+            Assert.AreEqual(expected, listLength);
+        }
+
+        [TestMethod]
+        public void GetFirst_DeleteAllSingleValueOneSuitable()
+        {
+            char expected = 'b';
+
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('b');
+            list.Append('c');
+
+            list.DeleteAll('a');
+
+            char listValue = list.Get(0);
+
+            Assert.AreEqual(expected, listValue);
+        }
+
+        [TestMethod]
+        public void GetMiddle_DeleteAllSingleValueOneSuitable()
+        {
+            char expected = 'c';
+
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('b');
+            list.Append('c');
+
+            list.DeleteAll('b');
+
+            char listValue = list.Get(1);
+
+            Assert.AreEqual(expected, listValue);
+        }
+
+        [TestMethod]
+        public void GetLast_DeleteAllSingleValueOneSuitable()
+        {
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('b');
+            list.Append('c');
+
+            list.DeleteAll('c');
+
+            Assert.ThrowsException<IndexOutOfRangeException>(() => list.Get(2));
+        }
+
+        [TestMethod]
+        public void Get_DeleteAllOnlyElement()
+        {
+            CircularList list = new CircularList();
+            list.Append('a');
+
+            list.DeleteAll('a');
+
+            Assert.ThrowsException<NullReferenceException>(() => list.Get(0));
+        }
+
+        [TestMethod]
+        public void Length_DeleteAllSingleValueOneSuitable()
+        {
+            int expected = 2;
+
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('b');
+            list.Append('c');
+
+            list.DeleteAll('a');
+
+            int length = list.Length();
+
+            Assert.AreEqual(expected, length);
+        }
+
+        [TestMethod]
+        public void Length_DeleteAllSingleElement()
+        {
+            int expected = 0;
+
+            CircularList list = new CircularList();
+            list.Append('a');
+
+            list.DeleteAll('a');
+
+            int length = list.Length();
+
+            Assert.AreEqual(expected, length);
+        }
+
+        [TestMethod]
+        public void Get_DeleteAllAllSuitable()
+        {
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('a');
+            list.Append('a');
+
+            list.DeleteAll('a');
+
+            Assert.ThrowsException<NullReferenceException>(() => list.Get(0));
+        }
+
+        [TestMethod]
+        public void Length_DeleteAllAllSuitable()
+        {
+            int expected = 0;
+
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('a');
+            list.Append('a');
+
+            list.DeleteAll('a');
+
+            int length = list.Length();
+
+            Assert.AreEqual(expected, length);
+        }
+
+        [TestMethod]
+        public void GetFirst_DeleteAllSingleValueMultipleSuitable()
+        {
+            char expected = 'b';
+
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('b');
+            list.Append('a');
+            list.Append('c');
+
+            list.DeleteAll('a');
+
+            char listValue = list.Get(0);
+
+            Assert.AreEqual(expected, listValue);
+        }
+
+        [TestMethod]
+        public void GetMiddle_DeleteAllSingleValueMultipleSuitable()
+        {
+            char expected = 'c';
+
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('b');
+            list.Append('a');
+            list.Append('c');
+
+            list.DeleteAll('a');
+
+            char listValue = list.Get(1);
+
+            Assert.AreEqual(expected, listValue);
+        }
+
+        [TestMethod]
+        public void GetLast_DeleteAllSingleValueMultipleSuitable()
+        {
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('b');
+            list.Append('a');
+            list.Append('c');
+
+            list.DeleteAll('a');
+
+            Assert.ThrowsException<IndexOutOfRangeException>(() => list.Get(3));
+        }
+
+        [TestMethod]
+        public void Length_DeleteAllSingleValueMultipleSuitable()
+        {
+            int expected = 2;
+
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('b');
+            list.Append('a');
+            list.Append('c');
+
+            list.DeleteAll('a');
+
+            int length = list.Length();
+
+            Assert.AreEqual(expected, length);
+        }
+
+        [TestMethod]
+        public void GetFirst_DeleteAllMultipleValuesSingleSuitable()
+        {
+            char expected = 'f';
+
+            CircularList list = new CircularList();
+            list.Append('b');
+            list.Append('a');
+            list.Append('f');
+            list.Append('c');
+            list.Append('g');
+
+            list.DeleteAll('b');
+            list.DeleteAll('a');
+
+            char listValue = list.Get(0);
+
+            Assert.AreEqual(expected, listValue);
+        }
+
+        [TestMethod]
+        public void GetMiddle_DeleteAllMultipleValuesSingleSuitable()
+        {
+            char expected = 'c';
+
+            CircularList list = new CircularList();
+            list.Append('b');
+            list.Append('f');
+            list.Append('a');
+            list.Append('c');
+            list.Append('g');
+
+            list.DeleteAll('b');
+            list.DeleteAll('a');
+
+            char listValue = list.Get(1);
+
+            Assert.AreEqual(expected, listValue);
+        }
+
+        [TestMethod]
+        public void GetExtra_DeleteAllMultipleValuesSingleSuitable()
+        {
+            CircularList list = new CircularList();
+            list.Append('b');
+            list.Append('f');
+            list.Append('a');
+            list.Append('c');
+            list.Append('g');
+
+            list.DeleteAll('b');
+            list.DeleteAll('a');
+
+            Assert.ThrowsException<IndexOutOfRangeException>(() => list.Get(3));
+        }
+
+        [TestMethod]
+        public void Length_DeleteAllMultipleValuesSingleSuitable()
+        {
+            int expected = 3;
+
+            CircularList list = new CircularList();
+            list.Append('b');
+            list.Append('f');
+            list.Append('a');
+            list.Append('c');
+            list.Append('g');
+
+            list.DeleteAll('b');
+            list.DeleteAll('a');
+
+            int length = list.Length();
+
+            Assert.AreEqual(expected, length);
+        }
+
+        [TestMethod]
+        public void GetFirst_DeleteAllMultipleValuesSingleSuitableFirstMultipleSuitableSecond()
+        {
+            char expected = 'f';
+
+            CircularList list = new CircularList();
+            list.Append('b');
+            list.Append('a');
+            list.Append('f');
+            list.Append('c');
+            list.Append('a');
+            list.Append('g');
+
+            list.DeleteAll('b');
+            list.DeleteAll('a');
+
+            char listValue = list.Get(0);
+
+            Assert.AreEqual(expected, listValue);
+        }
+
+        [TestMethod]
+        public void GetMiddle_DeleteAllMultipleValuesSingleSuitableFirstMultipleSuitableSecond()
+        {
+            char expected = 'g';
+
+            CircularList list = new CircularList();
+            list.Append('b');
+            list.Append('f');
+            list.Append('a');
+            list.Append('c');
+            list.Append('a');
+            list.Append('g');
+
+            list.DeleteAll('b');
+            list.DeleteAll('a');
+
+            char listValue = list.Get(2);
+
+            Assert.AreEqual(expected, listValue);
+        }
+
+        [TestMethod]
+        public void GetExtra_DeleteAllMultipleValuesSingleSuitableFirstMultipleSuitableSecond()
+        {
+            CircularList list = new CircularList();
+            list.Append('b');
+            list.Append('f');
+            list.Append('a');
+            list.Append('c');
+            list.Append('a');
+            list.Append('g');
+
+            list.DeleteAll('b');
+            list.DeleteAll('a');
+
+            Assert.ThrowsException<IndexOutOfRangeException>(() => list.Get(3));
+        }
+
+        [TestMethod]
+        public void Length_DeleteAllMultipleValuesSingleSuitableFirstMultipleSuitableSecond()
+        {
+            int expected = 3;
+
+            CircularList list = new CircularList();
+            list.Append('b');
+            list.Append('f');
+            list.Append('a');
+            list.Append('c');
+            list.Append('a');
+            list.Append('g');
+
+            list.DeleteAll('b');
+            list.DeleteAll('a');
+
+            int length = list.Length();
+
+            Assert.AreEqual(expected, length);
+        }
+
+        [TestMethod]
+        public void GetFirst_DeleteAllMultipleValuesMultipleSuitableBoth()
+        {
+            char expected = 'f';
+
+            CircularList list = new CircularList();
+            list.Append('b');
+            list.Append('b');
+            list.Append('a');
+            list.Append('f');
+            list.Append('c');
+            list.Append('a');
+            list.Append('b');
+            list.Append('g');
+
+            list.DeleteAll('b');
+            list.DeleteAll('a');
+
+            char listValue = list.Get(0);
+
+            Assert.AreEqual(expected, listValue);
+        }
+
+        [TestMethod]
+        public void GetMiddle_DeleteAllMultipleValuesMultipleSuitableBoth()
+        {
+            char expected = 'g';
+
+            CircularList list = new CircularList();
+            list.Append('b');
+            list.Append('f');
+            list.Append('a');
+            list.Append('c');
+            list.Append('b');
+            list.Append('a');
+            list.Append('b');
+            list.Append('g');
+
+            list.DeleteAll('b');
+            list.DeleteAll('a');
+
+            char listValue = list.Get(2);
+
+            Assert.AreEqual(expected, listValue);
+        }
+
+        [TestMethod]
+        public void GetExtra_DeleteAllMultipleValuesMultipleSuitableBoth()
+        {
+            CircularList list = new CircularList();
+            list.Append('b');
+            list.Append('f');
+            list.Append('a');
+            list.Append('c');
+            list.Append('a');
+            list.Append('b');
+            list.Append('g');
+
+            list.DeleteAll('b');
+            list.DeleteAll('a');
+
+            Assert.ThrowsException<IndexOutOfRangeException>(() => list.Get(3));
+        }
+
+        [TestMethod]
+        public void Length_DeleteAllMultipleValuesMultipleSuitableBoth()
+        {
+            int expected = 3;
+
+            CircularList list = new CircularList();
+            list.Append('b');
+            list.Append('f');
+            list.Append('a');
+            list.Append('b');
+            list.Append('c');
+            list.Append('a');
+            list.Append('b');
+            list.Append('g');
+
+            list.DeleteAll('b');
+            list.DeleteAll('a');
+
+            int length = list.Length();
+
+            Assert.AreEqual(expected, length);
+        }
+
+        [TestMethod]
+        public void CompareFirst_DeleteAllSingleInClone()
+        {
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('b');
+            list.Append('a');
+            list.Append('c');
+            list.Append('d');
+
+            CircularList clone = list.Clone();
+            clone.DeleteAll('a');
+
+            char expected = list.Get(0);
+            char value = clone.Get(0);
+
+            Assert.AreNotEqual(expected, value);
+        }
+
+        [TestMethod]
+        public void CompareMiddle_DeleteAllSingleInOriginal()
+        {
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('b');
+            list.Append('a');
+            list.Append('c');
+            list.Append('d');
+
+            CircularList clone = list.Clone();
+
+            list.DeleteAll('a');
+
+            char expected = list.Get(1);
+            char value = clone.Get(1);
+
+            Assert.AreNotEqual(expected, value);
+        }
+
+        [TestMethod]
+        public void CompareLength_DeleteAllSingleInClone()
+        {
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('b');
+            list.Append('a');
+            list.Append('c');
+            list.Append('d');
+
+            CircularList clone = list.Clone();
+
+            clone.DeleteAll('a');
+
+            int expected = list.Length();
+            int length = clone.Length();
+
+            Assert.AreNotEqual(expected, length);
+        }
+
+        [TestMethod]
+        public void CompareLength_DeleteAllMultipleInOriginal()
+        {
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('b');
+            list.Append('a');
+            list.Append('c');
+            list.Append('d');
+
+            CircularList clone = list.Clone();
+
+            list.DeleteAll('a');
+
+            int expected = list.Length();
+            int length = clone.Length();
+
+            Assert.AreNotEqual(expected, length);
+        }
+
+        [TestMethod]
+        public void LengthOriginal_DeleteAllMultipleInOriginal()
+        {
+            int expected = 3;
+
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('b');
+            list.Append('a');
+            list.Append('c');
+            list.Append('d');
+
+            CircularList clone = list.Clone();
+
+            list.DeleteAll('a');
+
+            int length = list.Length();
+
+            Assert.AreEqual(expected, length);
+        }
+
+        [TestMethod]
+        public void LengthClone_DeleteAllMultipleInOriginal()
+        {
+            int expected = 5;
+
+            CircularList list = new CircularList();
+            list.Append('a');
+            list.Append('b');
+            list.Append('a');
+            list.Append('c');
+            list.Append('d');
+
+            CircularList clone = list.Clone();
+
+            list.DeleteAll('a');
+
+            int length = clone.Length();
+
+            Assert.AreEqual(expected, length);
+        }
     }
 }
