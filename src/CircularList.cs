@@ -184,30 +184,15 @@ namespace MTD_Lab2
             if (head == null) return;
 
             CircularList reversed = new CircularList();
-            CharNode current;
-            CharNode next;
-            while (true)
+            int counter = length;
+            while (counter > 0)
             {
-                current = head;
-                next = current.next;
-                while (true)
-                {
-                    if (next.next == head)
-                    {
-                        if (current.next == head)
-                        {
-                            reversed.Append(current.value);
-                            head = reversed.head;
-                            return;
-                        }
-                        reversed.Append(next.value);
-                        current.next = head;
-                        break;
-                    }
-                    current = current.next;
-                    next = current.next;
-                }
+                CharNode current = head;
+                for (int i = 0; i < counter - 1; i++) current = current.next;
+                reversed.Append(current.value);
+                counter--;
             }
+            head = reversed.head;
         }
 
         public int FindFirst(char element)
@@ -258,26 +243,12 @@ namespace MTD_Lab2
             }
 
             CharNode current = head;
-            while (true)
-            {
-                if (current.next == head)
-                {
-                    current.next = extender.head;
-                    break;
-                }
-                current = current.next;
-            }
+            while (current.next != head) current = current.next;
+            current.next = extender.head;
 
             CharNode extCurrent = extender.head;
-            while(true)
-            {
-                if (extCurrent.next == extender.head) 
-                {
-                    extCurrent.next = head;
-                    break;
-                }
-                extCurrent = extCurrent.next;
-            }
+            while (extCurrent.next != extender.head) extCurrent = extCurrent.next;
+            extCurrent.next = head;
         }
     }
 }
